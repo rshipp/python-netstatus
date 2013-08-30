@@ -49,6 +49,7 @@ class NetworkObject():
         >>> myNetworkObject.getPingResponse()
         Null
         >>> myNetworkObject.ping()
+        True
         >>> myNetworkObject.getPingResponse()
         {'delay': delay, 'ip': ip, 'packet_size': packet_size, 'ip_header': ip_header, 'icmp_header': icmp_header}
         >>> myNetworkObject.getPingResponse()['delay']
