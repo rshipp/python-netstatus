@@ -4,7 +4,9 @@
    devices and services, in a portable and extensible way.
 """
 
-import config, objects
+import config
+import networkobject
+import objects
 
 def main():
     """Run the module as a script."""
