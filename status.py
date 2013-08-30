@@ -13,11 +13,11 @@ import objects
 def main(args):
     """Run the module as a script."""
     print "Running as a script - this is just an example..."
-    airuh2 = networkobject.NetworkObject("192.168.1.62")
-    if airuh2.ping():
-        print "airuh2 is up (replied to an ICMP request)"
+    myDevice = networkobject.NetworkObject("192.168.1.1")
+    if myDevice.ping():
+        print "%s is up (replied to an ICMP request)" % myDevice.ip
     else:
-        print "airuh2 is down (no response to ICMP request)"
+        print "%s is down (no response to ICMP request)" % myDevice.ip
 
 if __name__ == "__main__":
     main(sys.argv)
