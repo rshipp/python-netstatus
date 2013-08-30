@@ -34,7 +34,7 @@ class NetworkObject():
         root/Administrator permissions. The Ping class will raise
         socket.error if you don't have the proper permissions.
         """
-        Ping ping(self.ip)
+        ping = Ping(self.ip)
         ping.do()
         # TODO: Fix python-ping so that it returns useful information
         # and enerally acts more like a publicly accessable function
