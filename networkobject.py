@@ -8,9 +8,10 @@ from ping.ping import Ping
 
 class NetworkObject():
    
-    def __init__():
+    def __init__(self, ip):
         # Constructor
-        self._pingResponse = Null
+        self._pingResponse = None
+        self.ip = ip
 
     def ping(self):
         """
@@ -32,7 +33,7 @@ class NetworkObject():
         ping = Ping(self.ip)
         self._pingResponse = ping.do()
         
-        if self._pingResponse == Null:
+        if self._pingResponse == None:
             return False
         else:
             return True
@@ -44,10 +45,9 @@ class NetworkObject():
         information about the most recent response is stored. If
         self.ping() has not already been called, this function will
         return the default value of the object used to store ping
-        response information, Null.
+        response information, None.
 
         >>> myNetworkObject.getPingResponse()
-        Null
         >>> myNetworkObject.ping()
         True
         >>> myNetworkObject.getPingResponse()
