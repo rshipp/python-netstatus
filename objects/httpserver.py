@@ -62,7 +62,6 @@ class HTTPServer(networkobject.NetworkObject):
         if response != None and response.status >= 100 and response.status <= 399:
             return True
         else:
-            print response
             return False
 
 
