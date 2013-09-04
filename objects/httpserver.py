@@ -4,20 +4,26 @@ This subclass extends NetworkObjects to provide functionality for
 checking the availability of HTTP web services. You can instantiate
 objects from this directly, or further subclass it to suit your
 needs.
+
+The optional 'host' argument can be set to change the HTTP Host header.
+By default, it will be set to self.ip.
 """
 
-import httplib
-import ..networkobject as networkobject
+import sys, httplib
+import networkobject
 
 
 class HTTPServer(networkobject.NetworkObject):
-    def __init__(self, port=httplib.HTTP_PORT, host=self.ip):
-        networkobject.NetworkObject.__init__(self)
+    def __init__(self, ip, port=httplib.HTTP_PORT, host=None):
+        networkobject.NetworkObject.__init__(self, ip)
         self.port = port
-        self.host = host
+        if host == None:
+            self.host = self.ip
+        else:
+            self.host = host
         self._HTTPResponse = None
 
-    def HTTPRequest(path="/", strict=True):
+    def HTTPRequest(self, path="/", strict=True):
         """
         Returns a boolean value depending on the HTTP error code
         reported by the server. HTTP status responses from 100-399 will
@@ -45,16 +51,18 @@ class HTTPServer(networkobject.NetworkObject):
         """
         try:
             http = httplib.HTTPConnection(self.ip, self.port)
-            response = http.request("GET", path, headers={"Host": self.host})
+            http.request("GET", path, headers={"Host": self.host})
+            response = http.getresponse()
         except:
             # Probably a network error.
             return False
 
         self._HTTPResponse = response
 
-        if response.status >= 100 and response.status <= 399:
+        if response != None and response.status >= 100 and response.status <= 399:
             return True
         else:
+            print response
             return False
 
 
