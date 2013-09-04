@@ -1,0 +1,102 @@
+Help on module objects.httpserver in objects:
+
+NAME
+    objects.httpserver
+
+FILE
+    /home/one/dev/network-status/objects/httpserver.py
+
+DESCRIPTION
+    NetworkObject.HTTPServer
+    This subclass extends NetworkObjects to provide functionality for
+    checking the availability of HTTP web services. You can instantiate
+    objects from this directly, or further subclass it to suit your
+    needs.
+    
+    The optional 'host' argument can be set to change the HTTP Host header.
+    By default, it will be set to self.ip.
+
+CLASSES
+    objects.networkobject.NetworkObject
+        HTTPServer
+    
+    class HTTPServer(objects.networkobject.NetworkObject)
+     |  Methods defined here:
+     |  
+     |  HTTPRequest(self, path='/', strict=True)
+     |      Returns a boolean value depending on the HTTP error code
+     |      reported by the server. HTTP status responses from 100-399 will
+     |      result in a return value of True, while status codes greater
+     |      than 400 (error) or less than 100 (not defined by HTTP
+     |      standards) will result in a return value of False.
+     |      
+     |      By default, responses that cannot be parsed as valid HTTP/1.0 or
+     |      1.1 will also cause this function to return False. To change
+     |      this behavior, call this function with strict=False. Eg:
+     |      
+     |      >>> h = myhttpserverobject.HTTPRequest("/", False)
+     |      
+     |      The last case in which this function will return False is if a
+     |      network error occurs (for example, the server is down, or the
+     |      client is not on the network). In this situation, the value of
+     |      the HTTP response instance variable (see below) will NOT be
+     |      changed.
+     |      
+     |      This function also sets/changes the value of an
+     |      instance variable to include information about the HTTP
+     |      response. This information can be accessed publicly in the form
+     |      of a getter member function that returns an HTTPResponse object.
+     |      See getHTTPResponse().
+     |  
+     |  __init__(self, ip, port=80, host=None)
+     |  
+     |  getHTTPResponse()
+     |      A 'getter' method that returns an HTTPResponse object containing
+     |      (possibly) useful information about the HTTP server's last
+     |      response. Note that only the most recent response is available.
+     |      
+     |      For information about HTTPResponse objects, refer to the Python
+     |      httplib documentation, available online as:
+     |      http://docs.python.org/2/library/httplib.html?highlight=httplib#httpresponse-objects
+     |      
+     |      The most useful information will probably be:
+     |      HTTPResponse.status        Status code returned by server
+     |      HTTPResponse.read()        Reads and returns the response body
+     |      HTTPResponse.getheader()   Returns a list of (header, value) tuples
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from objects.networkobject.NetworkObject:
+     |  
+     |  getPingResponse()
+     |      A 'getter' method that returns a dictionary of (possibly) useful
+     |      information about the last ping response. Note that only
+     |      information about the most recent response is stored. If
+     |      self.ping() has not already been called, this function will
+     |      return the default value of the object used to store ping
+     |      response information, None.
+     |      
+     |      >>> myNetworkObject.getPingResponse()
+     |      >>> myNetworkObject.ping()
+     |      True
+     |      >>> myNetworkObject.getPingResponse()
+     |      {'delay': delay, 'ip': ip, 'packet_size': packet_size, 'ip_header': ip_header, 'icmp_header': icmp_header}
+     |      >>> myNetworkObject.getPingResponse()['delay']
+     |      delay
+     |  
+     |  ping(self)
+     |      Send a single ICMP echo request.
+     |      
+     |      Returns True if an ICMP response is recieved from the
+     |      pinged host, and False otherwise.
+     |      
+     |      This function also sets/changes the value of self.pingResponse
+     |      to include information about the ICMP response packet. This
+     |      information can be accessed publicly in the form of a getter
+     |      member function that returns a dictionary. See
+     |      getPingResponse().
+     |      
+     |      NOTE: Pinging in Python will open a raw socket, and requires
+     |      root/Administrator permissions. The Ping class will raise
+     |      socket.error if you don't have the proper permissions.
+
+

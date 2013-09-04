@@ -1,0 +1,10 @@
+#!/bin/bash
+# update docs with pydoc
+
+pydoc objects > docs/objects.pydoc
+
+for file in objects/[^_]*.py; do
+    path=${file/.py/}
+    obj=${path/\//.}
+    pydoc $obj > docs/${obj/*./}.pydoc
+done

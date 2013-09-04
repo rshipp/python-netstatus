@@ -1,0 +1,18 @@
+Help on package objects:
+
+NAME
+    objects
+
+FILE
+    /home/one/dev/network-status/objects/__init__.py
+
+DESCRIPTION
+    Network objects, defined by the user and imported by the main scipt.
+    These should subclass the NetworkObjects class. Some default
+    subclassess have been created for you.
+
+PACKAGE CONTENTS
+    httpserver
+    networkobject
+
+
