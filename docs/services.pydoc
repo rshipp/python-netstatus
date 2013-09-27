@@ -1,0 +1,17 @@
+Help on package services:
+
+NAME
+    services
+
+FILE
+    /home/one/dev/python-netstatus/services/__init__.py
+
+DESCRIPTION
+    Network services, defined by the user and imported by the main
+    scipt. Some default subclassess have been created for you.
+
+PACKAGE CONTENTS
+    http
+    httpserver
+
+

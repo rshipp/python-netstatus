@@ -1,5 +1,5 @@
 """
-services.HTTPServer
+services.httpserver.HTTPServer
 This class provides functionality for checking the availability of HTTP
 web services.
 
@@ -9,7 +9,7 @@ By default, it will be set to self.ip.
 
 import sys, httplib
 
-class HTTPServer(networkobject.NetworkObject):
+class HTTPServer(object):
     def __init__(self, ip, port=httplib.HTTP_PORT, host=None):
         networkobject.NetworkObject.__init__(self, ip)
         self.port = port

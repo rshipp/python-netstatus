@@ -1,10 +1,11 @@
 #!/bin/bash
 # update docs with pydoc
 
-pydoc objects > docs/objects.pydoc
+pydoc host > docs/hosts.pydoc
+pydoc services > docs/services.pydoc
 
-for file in objects/[^_]*.py; do
+for file in services/[^_]*.py; do
     path=${file/.py/}
     obj=${path/\//.}
-    pydoc $obj > docs/${obj/*./}.pydoc
+    pydoc $obj > docs/services.${obj/*./}.pydoc
 done
