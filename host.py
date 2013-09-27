@@ -1,16 +1,27 @@
 """
 Defines the Host class.
-This is the base class from which all service classes defined by the
-user should descend.
 """
 
 from ping.ping import Ping
 
-class Host():
-   
+
+class NameConflictError(Exception):
+    pass
+
+
+class Host(object):
     def __init__(self, ip):
         self._pingResponse = None
         self.ip = ip
+
+    def __getattr__(self, name):
+        try:
+            return self.__dict__[name]
+        except KeyError as e:
+            raise AttributeError(e)
+
+    def __setattr__(self, name, value):
+        self.__dict__[name] = value
 
     def getStatus(self):
         """
@@ -19,7 +30,7 @@ class Host():
         Returns True if an ICMP response is recieved from the
         pinged host, and False otherwise.
 
-        This function also sets/changes the value of self.pingResponse
+        This function also sets/changes the value of self._pingResponse
         to include information about the ICMP response packet. This
         information can be accessed publicly in the form of a getter
         member function that returns a dictionary. See
@@ -37,7 +48,7 @@ class Host():
         else:
             return True
 
-    def getResponse():
+    def getResponse(self):
         """
         A 'getter' method that returns a dictionary of (possibly) useful
         information about the last ping response. Note that only
@@ -54,4 +65,41 @@ class Host():
         >>> myHost.getResponse()['delay']
         delay
         """
-        return _pingResponse
+        return self._pingResponse
+
+    def addService(self, name, service):
+        """Add a service object to your host, with the specified name.
+           Example:
+
+           >>> myHost = host.Host('127.0.0.1')
+           >>> myHTTPService = services.httpserver.HTTPServer()
+           >>> myHost.addService("http", myHTTPService)
+           >>> myHost.http.getStatus()
+           True
+           >>> myHost.http.getResponse()
+           {'foo': 'bar'}
+
+           Raises host.NameConflictError if a 'name' attribute already
+           exists in the host object.
+
+           >>> myHost.addService("http", myOtherHTTPService)
+           Traceback (most recent call last):
+               ...
+           host.NameConflictError: Member variable self.http cannot be assigned because that name is taken.
+
+           Note: 'name' MUST be a string, or be able to be converted to
+           a string with str(name).
+        """
+        # self.__getattr__() raises AttributeError if it cannot find
+        # 'self.name', but since we just want to make sure 'self.name'
+        # doesn't exist, we will throw our own exception if __getattr__
+        # succeeds. If __getattr__ fails, then we know self.name does
+        # not exist, so we catch AttributeError and create self.name.
+        # This just helps stop the user from overwriting member
+        # variables we need, like self._pingResponse.
+        try:
+            self.__getattr__(str(name))
+            raise NameConflictError("Member variable self.%s cannot be assigned because that name is taken." %
+                    (name))
+        except AttributeError:
+            self.__setattr__(str(name), service)
