@@ -1,7 +1,7 @@
 #!/bin/bash
 # update docs with pydoc
 
-pydoc host > docs/hosts.pydoc
+pydoc host > docs/host.pydoc
 pydoc services > docs/services.pydoc
 
 for file in services/[^_]*.py; do
