@@ -1,17 +1,13 @@
 """
-NetworkObject.HTTPServer
-This subclass extends NetworkObjects to provide functionality for
-checking the availability of HTTP web services. You can instantiate
-objects from this directly, or further subclass it to suit your
-needs.
+services.HTTPServer
+This class provides functionality for checking the availability of HTTP
+web services.
 
 The optional 'host' argument can be set to change the HTTP Host header.
 By default, it will be set to self.ip.
 """
 
 import sys, httplib
-import networkobject
-
 
 class HTTPServer(networkobject.NetworkObject):
     def __init__(self, ip, port=httplib.HTTP_PORT, host=None):
@@ -23,7 +19,7 @@ class HTTPServer(networkobject.NetworkObject):
             self.host = host
         self._HTTPResponse = None
 
-    def HTTPRequest(self, path="/", strict=True):
+    def getStatus(self, path="/", strict=True):
         """
         Returns a boolean value depending on the HTTP error code
         reported by the server. HTTP status responses from 100-399 will
@@ -65,7 +61,7 @@ class HTTPServer(networkobject.NetworkObject):
             return False
 
 
-    def getHTTPResponse():
+    def getResponse():
         """
         A 'getter' method that returns an HTTPResponse object containing
         (possibly) useful information about the HTTP server's last

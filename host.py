@@ -1,19 +1,18 @@
 """
-Defines the NetworkObject class.
-This is the base class from which all network objects defined by the
+Defines the Host class.
+This is the base class from which all service classes defined by the
 user should descend.
 """
 
 from ping.ping import Ping
 
-class NetworkObject():
+class Host():
    
     def __init__(self, ip):
-        # Constructor
         self._pingResponse = None
         self.ip = ip
 
-    def ping(self):
+    def getStatus(self):
         """
         Send a single ICMP echo request.
 
@@ -24,7 +23,7 @@ class NetworkObject():
         to include information about the ICMP response packet. This
         information can be accessed publicly in the form of a getter
         member function that returns a dictionary. See
-        getPingResponse().
+        getResponse().
 
         NOTE: Pinging in Python will open a raw socket, and requires
         root/Administrator permissions. The Ping class will raise
@@ -38,21 +37,21 @@ class NetworkObject():
         else:
             return True
 
-    def getPingResponse():
+    def getResponse():
         """
         A 'getter' method that returns a dictionary of (possibly) useful
         information about the last ping response. Note that only
         information about the most recent response is stored. If
-        self.ping() has not already been called, this function will
+        self.getStatus() has not already been called, this function will
         return the default value of the object used to store ping
         response information, None.
 
-        >>> myNetworkObject.getPingResponse()
-        >>> myNetworkObject.ping()
+        >>> myHost.getResponse()
+        >>> myHost.getStatus()
         True
-        >>> myNetworkObject.getPingResponse()
+        >>> myHost.getResponse()
         {'delay': delay, 'ip': ip, 'packet_size': packet_size, 'ip_header': ip_header, 'icmp_header': icmp_header}
-        >>> myNetworkObject.getPingResponse()['delay']
+        >>> myHost.getResponse()['delay']
         delay
         """
         return _pingResponse
