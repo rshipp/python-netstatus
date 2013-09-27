@@ -76,4 +76,4 @@ class HTTPServer(object):
         HTTPResponse.read()        Reads and returns the response body
         HTTPResponse.getheader()   Returns a list of (header, value) tuples
         """
-        return  _HTTPResponse
+        return  self._HTTPResponse
