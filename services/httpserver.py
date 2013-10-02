@@ -10,13 +10,18 @@ By default, it will be set to self.ip.
 import sys, httplib
 
 class HTTPServer(object):
-    def __init__(self, ip, port=httplib.HTTP_PORT, host=None):
-        networkobject.NetworkObject.__init__(self, ip)
+    def __init__(self, host, port=httplib.HTTP_PORT, hostname=None):
+        """
+        init must be passed a host object as its first parameter,
+        because it needs the IP (more information from the host object
+        may be used in the future.)
+        TODO: Is there some way we can avoid this?
+        """
         self.port = port
-        if host == None:
-            self.host = self.ip
+        if hostname == None:
+            self.hostname = host.ip
         else:
-            self.host = host
+            self.hostname = hostname
         self._HTTPResponse = None
 
     def getStatus(self, path="/", strict=True):
