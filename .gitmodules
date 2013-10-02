@@ -1,3 +1,6 @@
 [submodule "ping"]
 	path = ping
 	url = https://github.com/george2/python-ping.git
+[submodule "requests"]
+	path = requests
+	url = https://github.com/george2/requests.git

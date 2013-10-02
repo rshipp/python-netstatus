@@ -3,8 +3,8 @@ services.httpserver.HTTPServer
 This class provides functionality for checking the availability of HTTP
 web services.
 
-The optional 'host' argument can be set to change the HTTP Host header.
-By default, it will be set to self.ip.
+The optional 'hostname' argument can be set to change the HTTP Host
+header. By default, it will be set to self.ip.
 """
 
 import sys, httplib
@@ -24,7 +24,7 @@ class HTTPServer(object):
             self.hostname = hostname
         self._HTTPResponse = None
 
-    def getStatus(self, path="/", strict=True):
+    def getStatus(self, path="/"):
         """
         Returns a boolean value depending on the HTTP error code
         reported by the server. HTTP status responses from 100-399 will
@@ -32,24 +32,19 @@ class HTTPServer(object):
         than 400 (error) or less than 100 (not defined by HTTP
         standards) will result in a return value of False.
 
-        By default, responses that cannot be parsed as valid HTTP/1.0 or
-        1.1 will also cause this function to return False. To change
-        this behavior, call this function with strict=False. Eg:
-
-        >>> h = myhttpserverobject.HTTPRequest("/", False)
-
         The last case in which this function will return False is if a
         network error occurs (for example, the server is down, or the
         client is not on the network). In this situation, the value of
-        the HTTP response instance variable (see below) will NOT be
-        changed.
+        the HTTP response instance variable (see below) will be set to
+        None.
 
         This function also sets/changes the value of an
         instance variable to include information about the HTTP
         response. This information can be accessed publicly in the form
-        of a getter member function that returns an HTTPResponse object.
-        See getHTTPResponse().
+        of a getter member function that returns a dictionary of useful
+        information. See getResponse().
         """
+        self._HTTPResponse = None
         try:
             http = httplib.HTTPConnection(self.ip, self.port)
             http.request("GET", path, headers={"Host": self.host})
@@ -58,7 +53,7 @@ class HTTPServer(object):
             # Probably a network error.
             return False
 
-        self._HTTPResponse = response
+        self._HTTPResponse
 
         if response != None and response.status >= 100 and response.status <= 399:
             return True
