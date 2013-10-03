@@ -30,7 +30,7 @@ class HTTPServer(Server):
         The kwarg accepted by this function is 'path', which defaults to
         "/" and is appended to the ip address to form the URL.
         """
-        self._Response = None
+        super(HTTPServer, self).getStatus()
 
         # Construct the request data
         path = kwargs.get('path', "/")

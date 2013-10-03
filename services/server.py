@@ -1,7 +1,8 @@
 """
 services.server.Server
 
-A simple base class to outline how services should be implemented. 
+A simple base (abstract) class to outline how services should be
+implemented.
 """
 
 class Server(object):
