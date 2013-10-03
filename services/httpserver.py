@@ -17,6 +17,7 @@ class HTTPServer(Server):
             self.hostname = host.ip
         else:
             self.hostname = hostname
+        self.httpstring = "http://"
 
     def getStatus(self, **kwargs):
         """
@@ -38,7 +39,7 @@ class HTTPServer(Server):
 
         # Construct the request data
         path = kwargs.get('path', "/")
-        url = "http://" + self.ip + ":" + self.port + path
+        url = self.httpstring + self.ip + ":" + self.port + path
         headers = {'Host': self.hostname}
 
         try:
