@@ -5,6 +5,7 @@ PostgreSQL servers.
 """
 
 from services.sqlserver import SQLServer
+import psycopg2
 
 class PGSQLServer(SQLServer):
     def __init__(self, host, port=5432, user=None, password=None):
@@ -15,4 +16,11 @@ class PGSQLServer(SQLServer):
         Returns a boolean value depending on
         """
         super(PGSQLServer, self).getStatus()
-        return None
+
+        try:
+            conn = psycopg2.connect(host=self,host, port=self.port,
+                    user=self.user, password=self.password)
+        except:
+            return False
+
+        return True
