@@ -4,7 +4,7 @@ services.server.Server
 A simple base class to outline how services should be implemented. 
 """
 
-class HTTPServer(object):
+class Server(object):
     def __init__(self, host, port):
         """
         init must be passed a host object as its first parameter,

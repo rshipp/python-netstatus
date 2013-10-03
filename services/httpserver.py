@@ -11,7 +11,7 @@ import requests
 from services.server import Server
 
 class HTTPServer(Server):
-    def __init__(self, host, port=httplib.HTTP_PORT, hostname=None):
+    def __init__(self, host, port=80, hostname=None):
         super(HTTPServer, self).__init__(host, port)
         if hostname == None:
             self.hostname = host.ip

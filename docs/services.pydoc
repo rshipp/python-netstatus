@@ -11,7 +11,8 @@ DESCRIPTION
     scipt. Some default subclassess have been created for you.
 
 PACKAGE CONTENTS
-    http
     httpserver
+    httpsserver
+    server
 
 
