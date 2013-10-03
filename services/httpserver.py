@@ -29,11 +29,6 @@ class HTTPServer(Server):
 
         The kwarg accepted by this function is 'path', which defaults to
         "/" and is appended to the ip address to form the URL.
-
-        The last case in which this function will return False is if a
-        network error occurs (for example, the server is down, the
-        client is not on the network, or there was a timeout). In this
-        situation, getResponse() will return None.
         """
         self._Response = None
 

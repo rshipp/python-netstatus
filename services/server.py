@@ -25,7 +25,16 @@ class Server(object):
         implementations should have reasonable defaults and accept only
         optional arguments. When implementing getStatus, always be sure
         to keep the signature the same, so the method is properly
-        overridden.
+        overridden. If other information is needed to check the status
+        of a server (username, password, etc), use arguments in the
+        constructor, not in getStatus(). (Optional arguments to
+        getStatus should be to help you check the status of a certain
+        resource, not the server itself.)
+
+        The last case in which this function should return False is if a
+        network error occurs (for example, the server is down, the
+        client is not on the network, or there was a timeout). In this
+        situation, getResponse() should return None.
 
         This function should also set/change the value of an instance
         variable to include information about the response. Response
