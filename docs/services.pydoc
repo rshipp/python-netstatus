@@ -14,5 +14,6 @@ PACKAGE CONTENTS
     httpserver
     httpsserver
     server
+    sqlserver
 
 

@@ -1,0 +1,66 @@
+Help on module services.server in services:
+
+NAME
+    services.server - services.server.Server
+
+FILE
+    /home/one/dev/python-netstatus/services/server.py
+
+DESCRIPTION
+    A simple base class to outline how services should be implemented.
+
+CLASSES
+    __builtin__.object
+        Server
+    
+    class Server(__builtin__.object)
+     |  Methods defined here:
+     |  
+     |  __init__(self, host, port)
+     |      init must be passed a host object as its first parameter,
+     |      because it needs the IP (more information from the host object
+     |      may be used depending on the specific service in question.)
+     |      TODO: Is there some way we can avoid this?
+     |  
+     |  getResponse()
+     |      A 'getter' method that returns a dictionary of (possibly) useful
+     |      information about the server's last response. Note that only the
+     |      most recent response is available. As long as the _Response
+     |      variable is used, this function should not need to be
+     |      overwritten.
+     |  
+     |  getStatus(self)
+     |      Attempts to determine the status of the service in some way, and
+     |      returns a boolean value.
+     |      
+     |      Note that getStatus() only accepts kwargs, meaning all getStatus
+     |      implementations should have reasonable defaults and accept only
+     |      optional arguments. When implementing getStatus, always be sure
+     |      to keep the signature the same, so the method is properly
+     |      overridden. If other information is needed to check the status
+     |      of a server (username, password, etc), use arguments in the
+     |      constructor, not in getStatus(). (Optional arguments to
+     |      getStatus should be to help you check the status of a certain
+     |      resource, not the server itself.)
+     |      
+     |      The last case in which this function should return False is if a
+     |      network error occurs (for example, the server is down, the
+     |      client is not on the network, or there was a timeout). In this
+     |      situation, getResponse() should return None.
+     |      
+     |      This function should also set/change the value of an instance
+     |      variable to include information about the response. Response
+     |      information will be accessed publicly in the form of a getter
+     |      member function (self.getResponse()) that returns a dictionary
+     |      of useful information.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+
+
