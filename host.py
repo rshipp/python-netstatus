@@ -72,7 +72,7 @@ class Host(object):
            Example:
 
            >>> myHost = host.Host('127.0.0.1')
-           >>> myHTTPService = services.httpserver.HTTPServer()
+           >>> myHTTPService = services.httpserver.HTTPServer(myHost)
            >>> myHost.addService("http", myHTTPService)
            >>> myHost.http.getStatus()
            True
