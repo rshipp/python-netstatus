@@ -7,24 +7,18 @@ The optional 'hostname' argument can be set to change the HTTP Host
 header. By default, it will be set to self.ip.
 """
 
-import sys, httplib
+import requests
+from services.server import Server
 
-class HTTPServer(object):
+class HTTPServer(Server):
     def __init__(self, host, port=httplib.HTTP_PORT, hostname=None):
-        """
-        init must be passed a host object as its first parameter,
-        because it needs the IP (more information from the host object
-        may be used in the future.)
-        TODO: Is there some way we can avoid this?
-        """
-        self.port = port
+        super(HTTPServer, self).__init__(host, port)
         if hostname == None:
             self.hostname = host.ip
         else:
             self.hostname = hostname
-        self._HTTPResponse = None
 
-    def getStatus(self, path="/"):
+    def getStatus(self, **kwargs):
         """
         Returns a boolean value depending on the HTTP error code
         reported by the server. HTTP status responses from 100-399 will
@@ -32,48 +26,32 @@ class HTTPServer(object):
         than 400 (error) or less than 100 (not defined by HTTP
         standards) will result in a return value of False.
 
-        The last case in which this function will return False is if a
-        network error occurs (for example, the server is down, or the
-        client is not on the network). In this situation, the value of
-        the HTTP response instance variable (see below) will be set to
-        None.
+        The kwarg accepted by this function is 'path', which defaults to
+        "/" and is appended to the ip address to form the URL.
 
-        This function also sets/changes the value of an
-        instance variable to include information about the HTTP
-        response. This information can be accessed publicly in the form
-        of a getter member function that returns a dictionary of useful
-        information. See getResponse().
+        The last case in which this function will return False is if a
+        network error occurs (for example, the server is down, the
+        client is not on the network, or there was a timeout). In this
+        situation, getResponse() will return None.
         """
-        self._HTTPResponse = None
+        self._Response = None
+
+        # Construct the request data
+        path = kwargs.get('path', "/")
+        url = "http://" + self.ip + ":" + self.port + path
+        headers = {'Host': self.hostname}
+
         try:
-            http = httplib.HTTPConnection(self.ip, self.port)
-            http.request("GET", path, headers={"Host": self.host})
-            response = http.getresponse()
+            response = requests.get(url, headers=headers)
         except:
             # Probably a network error.
             return False
 
-        self._HTTPResponse
+        self._Response = response.headers
+        self._Response['status'] = response.status_code
+        self._Response['text'] = response.text
 
-        if response != None and response.status >= 100 and response.status <= 399:
+        if response.status_code != None and response.status >= 100 and response.status <= 399:
             return True
         else:
             return False
-
-
-    def getResponse():
-        """
-        A 'getter' method that returns an HTTPResponse object containing
-        (possibly) useful information about the HTTP server's last
-        response. Note that only the most recent response is available.
-
-        For information about HTTPResponse objects, refer to the Python
-        httplib documentation, available online as:
-        http://docs.python.org/2/library/httplib.html?highlight=httplib#httpresponse-objects
-
-        The most useful information will probably be:
-        HTTPResponse.status        Status code returned by server
-        HTTPResponse.read()        Reads and returns the response body
-        HTTPResponse.getheader()   Returns a list of (header, value) tuples
-        """
-        return  self._HTTPResponse
