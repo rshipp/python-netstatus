@@ -7,7 +7,8 @@ FILE
     /home/one/dev/python-netstatus/services/server.py
 
 DESCRIPTION
-    A simple base class to outline how services should be implemented.
+    A simple base (abstract) class to outline how services should be
+    implemented.
 
 CLASSES
     __builtin__.object
