@@ -12,7 +12,7 @@ class SQLServer(Server):
         self.user = user
         self.password = password
 
-    def getStatus(self, **kwargs):
+    def getStatus(self):
         """
         Returns a boolean value depending on whether some command can be
         executed on the server (and therefore that a successful login
@@ -20,8 +20,6 @@ class SQLServer(Server):
         command makes the most sense for that server type. Note that
         least privilege is assumed, so (eg.) write access is never
         tested.
-
-        No kwargs are parsed by this function.
 
         THIS IS AN ABSTRACT METHOD! Be sure you are returning either
         True or False in your implementation.

@@ -1,2 +1,2 @@
-problem in ./services/pgsqlserver.py - <type 'exceptions.SyntaxError'>: non-keyword arg after keyword arg (pgsqlserver.py, line 24)
+problem in services.pgsqlserver - <type 'exceptions.ImportError'>: No module named netstatus.services.sqlserver
 

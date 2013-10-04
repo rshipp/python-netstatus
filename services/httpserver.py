@@ -11,30 +11,27 @@ import requests
 from netstatus.services.server import Server
 
 class HTTPServer(Server):
-    def __init__(self, host, port=80, hostname=None):
+    def __init__(self, host, port=80, path="/", hostname=None):
         super(HTTPServer, self).__init__(host, port)
+        self.path = path
         if hostname == None:
             self.hostname = host.ip
         else:
             self.hostname = hostname
         self.httpstring = "http://"
 
-    def getStatus(self, **kwargs):
+    def getStatus(self):
         """
         Returns a boolean value depending on the HTTP error code
         reported by the server. HTTP status responses from 100-399 will
         result in a return value of True, while status codes greater
         than 400 (error) or less than 100 (not defined by HTTP
         standards) will result in a return value of False.
-
-        The kwarg accepted by this function is 'path', which defaults to
-        "/" and is appended to the ip address to form the URL.
         """
         super(HTTPServer, self).getStatus()
 
         # Construct the request data
-        path = kwargs.get('path', "/")
-        url = self.httpstring + self.ip + ":" + self.port + path
+        url = self.httpstring + self.ip + ":" + self.port + self.path
         headers = {'Host': self.hostname}
 
         try:

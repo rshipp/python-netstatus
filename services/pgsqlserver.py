@@ -13,7 +13,7 @@ class PGSQLServer(SQLServer):
         super(PGSQLServer, self).__init__(host, port, user, password)
         self.database = database
 
-    def getStatus(self, **kwargs):
+    def getStatus(self):
         """
         Returns a boolean value depending on whether a successful login
         can be performed on the server.

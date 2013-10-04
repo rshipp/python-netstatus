@@ -1,2 +1,2 @@
-problem in services.mssqlserver - <type 'exceptions.ImportError'>: No module named pymssql
+problem in services.mssqlserver - <type 'exceptions.ImportError'>: No module named netstatus.services.sqlserver
 

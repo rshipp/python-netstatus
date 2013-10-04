@@ -7,6 +7,6 @@ web services with SSL, including certificate verification.
 from netstatus.services.httpserver import HTTPServer
 
 class HTTPSServer(HTTPServer):
-    def __init__(self, host, port=443, hostname=None):
-        super(HTTPSServer, self).__init__(host, port, hostname)
+    def __init__(self, host, port=443, path="/", hostname=None):
+        super(HTTPSServer, self).__init__(host, port, path, hostname)
         self.httpstring = "https://"

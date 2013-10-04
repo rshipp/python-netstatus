@@ -4,7 +4,7 @@ NAME
     services
 
 FILE
-    /home/one/dev/python-netstatus/services/__init__.py
+    /home/one/dev/airsci-network-status/netstatus/services/__init__.py
 
 DESCRIPTION
     Network services, defined by the user and imported by the main
