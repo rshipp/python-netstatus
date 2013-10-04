@@ -4,7 +4,7 @@ This abstract class provides a base framework for checking the
 availability of SQL servers.
 """
 
-from services.server import Server
+from netstatus.services.server import Server
 
 class SQLServer(Server):
     def __init__(self, host, port, user, password):

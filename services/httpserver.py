@@ -8,7 +8,7 @@ header. By default, it will be set to self.ip.
 """
 
 import requests
-from services.server import Server
+from netstatus.services.server import Server
 
 class HTTPServer(Server):
     def __init__(self, host, port=80, hostname=None):

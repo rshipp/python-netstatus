@@ -4,7 +4,7 @@ This class provides functionality to check the availability of
 PostgreSQL servers.
 """
 
-from services.sqlserver import SQLServer
+from netstatus.services.sqlserver import SQLServer
 import psycopg2
 
 class PGSQLServer(SQLServer):
