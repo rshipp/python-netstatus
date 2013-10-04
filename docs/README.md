@@ -10,6 +10,7 @@ The general class structure of this project is:
     | boolean getStatus()
     | dict getResponse()
     | void addService(name, serviceObject)
+    | list getServices()
 
     Services (package netstatus.services)
     |

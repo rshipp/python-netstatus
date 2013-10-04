@@ -1,11 +1,14 @@
 #!/bin/bash
 # update docs with pydoc
 
-pydoc host > docs/host.pydoc
-pydoc services > docs/services.pydoc
+cd ..
 
-for file in services/[^_]*.py; do
+pydoc netstatus.host > netstatus/docs/host.pydoc
+pydoc netstatus.services > netstatus/docs/services.pydoc
+
+for file in netstatus/services/[^_]*.py; do
     path=${file/.py/}
     obj=${path/\//.}
-    pydoc $obj > docs/services.${obj/*./}.pydoc
+    obj=${obj/\//.}
+    pydoc $obj > netstatus/docs/services.${obj/*./}.pydoc
 done

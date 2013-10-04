@@ -12,6 +12,7 @@ class NameConflictError(Exception):
 class Host(object):
     def __init__(self, ip):
         self._pingResponse = None
+        self._Services = []
         self.ip = ip
 
     def __getattr__(self, name):
@@ -103,3 +104,8 @@ class Host(object):
                     (name))
         except AttributeError:
             self.__setattr__(str(name), service)
+            self._Services += [str(name)]
+
+    def getServices(self):
+        """Returns a list of services added to the host."""
+        return self._Services

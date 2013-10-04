@@ -1,7 +1,7 @@
-Help on package services:
+Help on package netstatus.services in netstatus:
 
 NAME
-    services
+    netstatus.services
 
 FILE
     /home/one/dev/airsci-network-status/netstatus/services/__init__.py

@@ -1,7 +1,7 @@
-Help on module services.server in services:
+Help on module netstatus.services.server in netstatus.services:
 
 NAME
-    services.server - services.server.Server
+    netstatus.services.server - services.server.Server
 
 FILE
     /home/one/dev/airsci-network-status/netstatus/services/server.py
