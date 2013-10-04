@@ -21,7 +21,7 @@ class PGSQLServer(SQLServer):
         super(PGSQLServer, self).getStatus()
 
         try:
-            conn = psycopg2.connect(host=self,host, port=self.port,
+            conn = psycopg2.connect(host=self.host, port=self.port,
                     user=self.user, password=self.password,
                     database=self.database)
             cur = conn.cursor()
