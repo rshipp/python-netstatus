@@ -8,9 +8,7 @@ The general class structure of this project is:
     Host (class netstatus.host.Host)
     |
     | boolean getStatus()
-    |
     | dict getResponse()
-    |
     | void addService(name, serviceObject)
 
     Services (package netstatus.services)
@@ -18,7 +16,6 @@ The general class structure of this project is:
     | Server (abstract class netstatus.services.server.Server)
     | | 
     | | boolean getResponse()
-    | |
     | | dict getResponse()
     | |
     | | HTTPServer (class netstatus.services.httpserver.HTTPServer)
