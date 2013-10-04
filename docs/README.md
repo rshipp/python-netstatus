@@ -25,5 +25,4 @@ The general class structure of this project is:
     | | SQLServer (abstract class netstatus.services.sqlserver.SQLServer)
     | | |
     | | | MSSQLServer (class netstatus.services.mssqlserver.MSSQLServer)
-    | | |
     | | | PGSQLServer (class netstatus.services.pgsqlserver.PGSQLServer)
