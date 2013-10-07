@@ -109,3 +109,10 @@ class Host(object):
     def getServices(self):
         """Returns a list of services added to the host."""
         return self._Services
+
+    def getService(self, serviceName):
+        """Return the service object with the specified name."""
+        if serviceName in self._Services:
+            return self.__getattr__(serviceName)
+        else:
+            raise AttributeError("No such service: %s." % serviceName)
