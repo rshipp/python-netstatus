@@ -31,7 +31,7 @@ class HTTPServer(Server):
         super(HTTPServer, self).getStatus()
 
         # Construct the request data
-        url = self.httpstring + self.ip + ":" + self.port + self.path
+        url = self.httpstring + self.ip + ":" + str(self.port) + self.path
         headers = {'Host': self.hostname}
 
         try:
@@ -44,7 +44,7 @@ class HTTPServer(Server):
         self._Response['status'] = response.status_code
         self._Response['text'] = response.text
 
-        if response.status_code != None and response.status >= 100 and response.status <= 399:
+        if response.status_code != None and response.status_code >= 100 and response.status_code <= 399:
             return True
         else:
             return False
