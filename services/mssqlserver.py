@@ -21,11 +21,13 @@ class MSSQLServer(SQLServer):
         super(MSSQLServer, self).getStatus()
         
         try:
-            conn = pymssql.connect(host=self.host, user=self.user,
+            conn = pymssql.connect(host=self.ip, user=self.user,
                     password=self.password, database=self.database)
             cur = conn.cursor()
             conn.close()
-        except:
+        except Exception, e:
+            self._Response = {}
+            self._Response['exception'] = e
             return False
 
         return True
