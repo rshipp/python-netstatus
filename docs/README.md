@@ -11,6 +11,7 @@ The general class structure of this project is:
     | dict getResponse()
     | void addService(name, serviceObject)
     | list getServices()
+    | Server getService(serviceName)
 
     Services (package netstatus.services)
     |
