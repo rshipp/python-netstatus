@@ -33,7 +33,6 @@ class HTTPServer(Server):
         # Construct the request data
         url = self.httpstring + self.ip + ":" + str(self.port) + self.path
         headers = {'Host': self.hostname}
-        print headers
 
         try:
             response = requests.get(url, headers=headers)
