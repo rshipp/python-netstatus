@@ -60,6 +60,9 @@ CLASSES
      |      >>> myHost.getResponse()['delay']
      |      delay
      |  
+     |  getService(self, serviceName)
+     |      Return the service object with the specified name.
+     |  
      |  getServices(self)
      |      Returns a list of services added to the host.
      |  

@@ -33,7 +33,7 @@ CLASSES
      |  ----------------------------------------------------------------------
      |  Methods inherited from netstatus.services.server.Server:
      |  
-     |  getResponse()
+     |  getResponse(self)
      |      A 'getter' method that returns a dictionary of (possibly) useful
      |      information about the server's last response. Note that only the
      |      most recent response is available. As long as the _Response
