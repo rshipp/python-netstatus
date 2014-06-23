@@ -2,7 +2,7 @@
 Defines the Host class.
 """
 
-from netstatus.ping.ping import Ping
+from ping import Ping
 
 
 class NameConflictError(Exception):

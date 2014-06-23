@@ -1,3 +1,4 @@
-psycopg2
-pymssql
-requests
+psycopg2==2.5.3
+pymssql==2.1.0
+requests==2.3.0
+-e git+https://github.com/george2/python-ping.git@4151769afc4713e62c1ca3a93d44638cd733170d#egg=python_ping-master      
