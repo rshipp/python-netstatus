@@ -25,7 +25,8 @@ class Server(object):
         The last case in which this function should return False is if a
         network error occurs (for example, the server is down, the
         client is not on the network, or there was a timeout). In this
-        situation, getResponse() should return None.
+        situation, getResponse() should return a dictionary containing
+        one key, 'exception', which has exception information.
 
         This function should also set/change the value of an instance
         variable to include information about the response. Response
@@ -39,7 +40,7 @@ class Server(object):
         # boolean return type.
         return None
 
-    def getResponse():
+    def getResponse(self):
         """
         A 'getter' method that returns a dictionary of (possibly) useful
         information about the server's last response. Note that only the

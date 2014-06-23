@@ -30,15 +30,15 @@ CLASSES
      |  
      |  getStatus(self)
      |      Returns a boolean value depending on the HTTP error code
-     |      reported by the server. HTTP status responses from 100-399 will
+     |      reported by the server. HTTP status responses from 100-499 will
      |      result in a return value of True, while status codes greater
-     |      than 400 (error) or less than 100 (not defined by HTTP
+     |      than 499 (server error) or less than 100 (not defined by HTTP
      |      standards) will result in a return value of False.
      |  
      |  ----------------------------------------------------------------------
      |  Methods inherited from netstatus.services.server.Server:
      |  
-     |  getResponse()
+     |  getResponse(self)
      |      A 'getter' method that returns a dictionary of (possibly) useful
      |      information about the server's last response. Note that only the
      |      most recent response is available. As long as the _Response

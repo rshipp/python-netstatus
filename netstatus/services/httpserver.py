@@ -23,28 +23,30 @@ class HTTPServer(Server):
     def getStatus(self):
         """
         Returns a boolean value depending on the HTTP error code
-        reported by the server. HTTP status responses from 100-399 will
+        reported by the server. HTTP status responses from 100-499 will
         result in a return value of True, while status codes greater
-        than 400 (error) or less than 100 (not defined by HTTP
+        than 499 (server error) or less than 100 (not defined by HTTP
         standards) will result in a return value of False.
         """
         super(HTTPServer, self).getStatus()
 
         # Construct the request data
-        url = self.httpstring + self.ip + ":" + self.port + self.path
+        url = self.httpstring + self.ip + ":" + str(self.port) + self.path
         headers = {'Host': self.hostname}
 
         try:
             response = requests.get(url, headers=headers)
-        except:
+        except Exception, e:
             # Probably a network error.
+            self._Response = {}
+            self._Response['exception'] = e
             return False
 
         self._Response = response.headers
         self._Response['status'] = response.status_code
         self._Response['text'] = response.text
 
-        if response.status_code != None and response.status >= 100 and response.status <= 399:
+        if response.status_code != None and response.status_code >= 100 and response.status_code <= 499:
             return True
         else:
             return False

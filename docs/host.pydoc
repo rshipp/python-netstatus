@@ -60,8 +60,11 @@ CLASSES
      |      >>> myHost.getResponse()['delay']
      |      delay
      |  
+     |  getService(self, serviceName)
+     |      Return the service object with the specified name.
+     |  
      |  getServices(self)
-     |      Returns a list of services added to the host.
+     |      Returns a list of services (names only) added to the host.
      |  
      |  getStatus(self)
      |      Send a single ICMP echo request.

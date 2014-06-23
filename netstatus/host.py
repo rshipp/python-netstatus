@@ -107,7 +107,7 @@ class Host(object):
             self._Services += [str(name)]
 
     def getServices(self):
-        """Returns a list of services added to the host."""
+        """Returns a list of services (names only) added to the host."""
         return self._Services
 
     def getService(self, serviceName):

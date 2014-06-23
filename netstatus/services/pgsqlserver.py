@@ -21,12 +21,14 @@ class PGSQLServer(SQLServer):
         super(PGSQLServer, self).getStatus()
 
         try:
-            conn = psycopg2.connect(host=self.host, port=self.port,
+            conn = psycopg2.connect(host=self.ip, port=self.port,
                     user=self.user, password=self.password,
                     database=self.database)
             cur = conn.cursor()
             conn.close()
-        except:
+        except Exception, e:
+            self._Response = {}
+            self._Response['exception'] = e
             return False
 
         return True
